@@ -18,29 +18,9 @@ expr : '(' expr ')'
      | IDENTIFIER
      | '!' expr
      | expr ('&&' | '||') expr
-  // | IDENTIFIER expr
-  // | condition '&&' condition
-  // | expr ('*'|'/') expr
-  // | expr ('+'|'-') expr
      ;
 
-
-/*condition : '!' expr
-          | condition '&&' condition
-          | expr '&&' expr
-          ; */
-
-
 //signal : ('0'|'1');
-
-//update :  ;
-
-//simulate :  ;
-
-
-/* block : '{' command* '}'
-      | command
-      ; */
 
 IDENTIFIER : [a-zA-Z_] [a-zA-Z0-9_]*;
 
