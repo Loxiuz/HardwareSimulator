@@ -1,5 +1,8 @@
 public abstract class AST {}
 
+
+class start extends AST{}
+
 /*--------------------------------------------------*/
 abstract class Hardware extends AST{}
 
