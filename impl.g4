@@ -2,7 +2,7 @@ grammar impl;
 
 start   : commands EOF;
 
-commands: hardware inputs outputs latchDec update updateDec  simulate simlnp;
+commands: hardware inputs outputs latchDec update updateDec simulate simlnp;
 
 hardware: '.hardware' IDENTIFIER;
 inputs : '.inputs' e1 = expr;

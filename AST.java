@@ -100,6 +100,7 @@ class And extends Expr {
         }
         public boolean eval(){return e1.eval() || e2.eval();}
     }
+
     class Negation extends Expr {
 
         Expr e1;
@@ -122,9 +123,7 @@ class And extends Expr {
 
         public String id;
 
-        public Identifier(String id) {
-            this.id = id;
-        }
+        public Identifier(String id) {this.id = id;}
 
         public String eval() {return id;}
     }
