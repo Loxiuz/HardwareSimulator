@@ -9,14 +9,6 @@ abstract class Commands extends AST{
     abstract public boolean eval();
 }
 
-class Sequence extends Commands{
-
-    @Override
-    public boolean eval() {
-        return false;
-    }
-}
-
 class Hardware extends Commands {
 
     @Override
@@ -88,34 +80,43 @@ abstract class Expr extends AST {
 
 class And extends Expr {
 
-    Expr c1;
-    Expr c2;
+    Expr e1;
+    Expr e2;
 
-    public And(Expr c1, Expr c2){
-        this.c1 = c1;
-        this.c2 = c2;
+    public And(Expr e1, Expr e2){
+        this.e1 = e1;
+        this.e2 = e2;
     }
-    public boolean eval(){return c1.eval() && c2.eval();}
+    public boolean eval(){return e1.eval() && e2.eval();}
 }
     class Or extends Expr{
 
-        Expr c1;
-        Expr c2;
+        Expr e1;
+        Expr e2;
 
-        public Or(Expr c1, Expr c2){
-            this.c1 = c1;
-            this.c2 = c2;
+        public Or(Expr e1, Expr e2){
+            this.e1 = e1;
+            this.e2 = e2;
         }
-        public boolean eval(){return c1.eval() || c2.eval();}
+        public boolean eval(){return e1.eval() || e2.eval();}
     }
     class Negation extends Expr {
 
-        Expr c1;
+        Expr e1;
 
-        public Negation(Expr c1){
-            this.c1 = c1;
+        public Negation(Expr e1){
+            this.e1 = e1;
         }
-        public boolean eval(){return !c1.eval();}
+        public boolean eval(){return !e1.eval();}
+    }
+    class Signal extends Expr {
+
+    public Expr b1;
+
+    public Signal(Expr b1){this.b1 = b1;}
+
+    public boolean eval(){return b1.eval();}
+
     }
     class Identifier {
 
@@ -127,12 +128,5 @@ class And extends Expr {
 
         public String eval() {return id;}
     }
-    class Const {
 
-        public Integer c;
-
-        public Const(Integer c) {this.c = c;}
-
-        public Integer eval() {return c;}
-    }
 /*--------------------------------------------------*/

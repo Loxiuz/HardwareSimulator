@@ -2,7 +2,7 @@ grammar impl;
 
 start   : commands EOF;
 
-commands: hardware inputs outputs latchDec update updateDec  simulate simlnp  #Sequence;
+commands: hardware inputs outputs latchDec update updateDec  simulate simlnp;
 
 hardware: '.hardware' IDENTIFIER;
 inputs : '.inputs' e1 = expr;
@@ -16,7 +16,7 @@ simlnp: IDENTIFIER '=' e1 = expr*;
 expr : '(' e1 = expr ')'                    #Parantheses
      | b1 = ('0'|'1')                       #Signal
      | x1 = IDENTIFIER                      #Identifier
-     | '!' expr                             #Negation
+     | '!' e1 = expr                        #Negation
      | e1=expr con=('&&' | '||') e2=expr    #Condition
      ;
 

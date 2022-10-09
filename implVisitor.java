@@ -16,6 +16,12 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(implParser.StartContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link implParser#commands}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommands(implParser.CommandsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link implParser#hardware}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -64,9 +70,38 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSimlnp(implParser.SimlnpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#expr}.
+	 * Visit a parse tree produced by the {@code Condition}
+	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr(implParser.ExprContext ctx);
+	T visitCondition(implParser.ConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Parantheses}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParantheses(implParser.ParanthesesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Signal}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSignal(implParser.SignalContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Identifier}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifier(implParser.IdentifierContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Negation}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNegation(implParser.NegationContext ctx);
 }
