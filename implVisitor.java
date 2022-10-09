@@ -91,12 +91,12 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSignal(implParser.SignalContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Identifier}
+	 * Visit a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIdentifier(implParser.IdentifierContext ctx);
+	T visitVariable(implParser.VariableContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Negation}
 	 * labeled alternative in {@link implParser#expr}.
@@ -104,4 +104,6 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNegation(implParser.NegationContext ctx);
+
+    AST visitExpr(implParser.ExprContext ctx);
 }

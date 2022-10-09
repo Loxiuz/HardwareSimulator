@@ -171,13 +171,13 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIdentifier(implParser.IdentifierContext ctx) { }
+	@Override public void enterVariable(implParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIdentifier(implParser.IdentifierContext ctx) { }
+	@Override public void exitVariable(implParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

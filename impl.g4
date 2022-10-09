@@ -9,13 +9,13 @@ inputs : '.inputs' e1 = expr;
 outputs: '.outputs' e1 = expr*;
 latchDec : ('.latch' e1 = expr '->' e2 = expr)*;
 update:  '.update';
-updateDec: (IDENTIFIER '=' e1 = expr)*;
+updateDec: (x1 = IDENTIFIER '=' e1 = expr)*;
 simulate:'.simulate';
-simlnp: IDENTIFIER '=' e1 = expr*;
+simlnp: x1 = IDENTIFIER '=' e1 = expr*;
 
 expr : '(' e1 = expr ')'                    #Parantheses
      | b1 = ('0'|'1')                       #Signal
-     | x1 = IDENTIFIER                      #Identifier
+     | x1 = IDENTIFIER                      #Variable
      | '!' e1 = expr                        #Negation
      | e1=expr con=('&&' | '||') e2=expr    #Condition
      ;

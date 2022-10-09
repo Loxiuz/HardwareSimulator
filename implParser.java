@@ -485,6 +485,7 @@ public class implParser extends Parser {
 	}
 
 	public static class UpdateDecContext extends ParserRuleContext {
+		public Token x1;
 		public ExprContext e1;
 		public List<TerminalNode> IDENTIFIER() { return getTokens(implParser.IDENTIFIER); }
 		public TerminalNode IDENTIFIER(int i) {
@@ -529,7 +530,7 @@ public class implParser extends Parser {
 				{
 				{
 				setState(59);
-				match(IDENTIFIER);
+				((UpdateDecContext)_localctx).x1 = match(IDENTIFIER);
 				setState(60);
 				match(T__6);
 				setState(61);
@@ -595,6 +596,7 @@ public class implParser extends Parser {
 	}
 
 	public static class SimlnpContext extends ParserRuleContext {
+		public Token x1;
 		public ExprContext e1;
 		public TerminalNode IDENTIFIER() { return getToken(implParser.IDENTIFIER, 0); }
 		public List<ExprContext> expr() {
@@ -630,7 +632,7 @@ public class implParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(69);
-			match(IDENTIFIER);
+			((SimlnpContext)_localctx).x1 = match(IDENTIFIER);
 			setState(70);
 			match(T__6);
 			setState(74);
@@ -733,25 +735,26 @@ public class implParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class IdentifierContext extends ExprContext {
+	public static class VariableContext extends ExprContext {
 		public Token x1;
 		public TerminalNode IDENTIFIER() { return getToken(implParser.IDENTIFIER, 0); }
-		public IdentifierContext(ExprContext ctx) { copyFrom(ctx); }
+		public VariableContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof implListener ) ((implListener)listener).enterIdentifier(this);
+			if ( listener instanceof implListener ) ((implListener)listener).enterVariable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof implListener ) ((implListener)listener).exitIdentifier(this);
+			if ( listener instanceof implListener ) ((implListener)listener).exitVariable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof implVisitor ) return ((implVisitor<? extends T>)visitor).visitIdentifier(this);
+			if ( visitor instanceof implVisitor ) return ((implVisitor<? extends T>)visitor).visitVariable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NegationContext extends ExprContext {
+		public ExprContext e1;
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -825,11 +828,11 @@ public class implParser extends Parser {
 				break;
 			case IDENTIFIER:
 				{
-				_localctx = new IdentifierContext(_localctx);
+				_localctx = new VariableContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(83);
-				((IdentifierContext)_localctx).x1 = match(IDENTIFIER);
+				((VariableContext)_localctx).x1 = match(IDENTIFIER);
 				}
 				break;
 			case T__12:
@@ -840,7 +843,7 @@ public class implParser extends Parser {
 				setState(84);
 				match(T__12);
 				setState(85);
-				expr(2);
+				((NegationContext)_localctx).e1 = expr(2);
 				}
 				break;
 			default:

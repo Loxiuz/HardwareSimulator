@@ -143,17 +143,17 @@ public interface implListener extends ParseTreeListener {
 	 */
 	void exitSignal(implParser.SignalContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Identifier}
+	 * Enter a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterIdentifier(implParser.IdentifierContext ctx);
+	void enterVariable(implParser.VariableContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Identifier}
+	 * Exit a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitIdentifier(implParser.IdentifierContext ctx);
+	void exitVariable(implParser.VariableContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Negation}
 	 * labeled alternative in {@link implParser#expr}.
