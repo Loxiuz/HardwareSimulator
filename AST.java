@@ -4,52 +4,81 @@ public abstract class AST {}
 class start extends AST{}
 
 /*--------------------------------------------------*/
-abstract class Hardware extends AST{}
 
-class H extends Hardware {
-
+abstract class Commands extends AST{
+    abstract public boolean eval();
 }
 
-abstract class Inputs extends AST{}
+class Sequence extends Commands{
 
-class I extends Inputs {
-
+    @Override
+    public boolean eval() {
+        return false;
+    }
 }
 
-abstract class Outputs extends AST{}
+class Hardware extends Commands {
 
-class O extends Outputs {
-
+    @Override
+    public boolean eval() {
+        return false;
+    }
 }
 
-abstract class LatchDec extends AST{}
+class Inputs extends Commands {
 
-class L extends LatchDec {
-
+    @Override
+    public boolean eval() {
+        return false;
+    }
 }
 
-abstract class Update extends AST{}
+class Outputs extends Commands {
 
-class U extends Update {
-
+    @Override
+    public boolean eval() {
+        return false;
+    }
 }
 
-abstract class UpdateDec extends AST{}
+class LatchDec extends Commands {
 
-class UD extends UpdateDec {
-
+    @Override
+    public boolean eval() {
+        return false;
+    }
 }
 
-abstract class Simulate extends AST{}
+class Update extends Commands {
 
-class S extends Simulate {
-
+    @Override
+    public boolean eval() {
+        return false;
+    }
 }
 
-abstract class Simlnp extends AST{}
+class UpdateDec extends Commands {
 
-class SL extends Simlnp {
+    @Override
+    public boolean eval() {
+        return false;
+    }
+}
 
+class Simulate extends Commands {
+
+    @Override
+    public boolean eval() {
+        return false;
+    }
+}
+
+class Simlnp extends Commands {
+
+    @Override
+    public boolean eval() {
+        return false;
+    }
 }
 
 /*--------------------------------------------------*/

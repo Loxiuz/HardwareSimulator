@@ -1,30 +1,26 @@
 grammar impl;
 
-start   : hardware inputs outputs latchDec update updateDec  simulate simlnp  EOF;
+start   : commands EOF;
 
+commands: hardware inputs outputs latchDec update updateDec  simulate simlnp  #Sequence;
 
-
-hardware: '.hardware' IDENTIFIER ;
-inputs : '.inputs' IDENTIFIER  ;
-outputs: '.outputs' IDENTIFIER* ;
-latchDec : ('.latch' IDENTIFIER '->' IDENTIFIER)*;
-update:  '.update' ;
-updateDec: (IDENTIFIER '=' expr)*  ;
+hardware: '.hardware' IDENTIFIER;
+inputs : '.inputs' e1 = expr;
+outputs: '.outputs' e1 = expr*;
+latchDec : ('.latch' e1 = expr '->' e2 = expr)*;
+update:  '.update';
+updateDec: (IDENTIFIER '=' e1 = expr)*;
 simulate:'.simulate';
-simlnp: IDENTIFIER '=' CONST;
+simlnp: IDENTIFIER '=' e1 = expr*;
 
-expr : '(' expr ')'
-     | CONST
-     | IDENTIFIER
-     | '!' expr
-     | expr ('&&' | '||') expr
+expr : '(' e1 = expr ')'                    #Parantheses
+     | b1 = ('0'|'1')                       #Signal
+     | x1 = IDENTIFIER                      #Identifier
+     | '!' expr                             #Negation
+     | e1=expr con=('&&' | '||') e2=expr    #Condition
      ;
 
-//signal : ('0'|'1');
-
 IDENTIFIER : [a-zA-Z_] [a-zA-Z0-9_]*;
-
-CONST : [0-9]+ ('.' [0-9]+)? ;
 
 HVIDRUM : [ \t\n]+ -> skip ;
 KOMMENTAR : '//' ~[\n]* -> skip ;
