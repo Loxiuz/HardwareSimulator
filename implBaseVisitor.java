@@ -115,4 +115,9 @@ public class implBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements i
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitNegation(implParser.NegationContext ctx) { return visitChildren(ctx); }
+
+	@Override
+	public AST visitExpr(implParser.ExprContext ctx) {
+		return null;
+	}
 }
