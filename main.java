@@ -69,7 +69,7 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 		List<String>id = new ArrayList<String>();
 		for (Token t : ctx.id)
 			id.add(t.getText());
-		return new Inputs(id);}
+		return new Outputs(id);}
 
 
 
