@@ -1,4 +1,4 @@
-// Generated from impl.g4 by ANTLR 4.10.1
+// Generated from C:/Users/Emjay/Desktop/HardwareSimulator\impl.g4 by ANTLR 4.10.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -22,18 +22,6 @@ public class implBaseListener implements implListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStart(implParser.StartContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCommands(implParser.CommandsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCommands(implParser.CommandsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -190,6 +178,18 @@ public class implBaseListener implements implListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNegation(implParser.NegationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConst(implParser.ConstContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConst(implParser.ConstContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

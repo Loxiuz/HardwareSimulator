@@ -1,4 +1,4 @@
-// Generated from impl.g4 by ANTLR 4.10.1
+// Generated from C:/Users/Emjay/Desktop/HardwareSimulator\impl.g4 by ANTLR 4.10.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -16,16 +16,6 @@ public interface implListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStart(implParser.StartContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link implParser#commands}.
-	 * @param ctx the parse tree
-	 */
-	void enterCommands(implParser.CommandsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link implParser#commands}.
-	 * @param ctx the parse tree
-	 */
-	void exitCommands(implParser.CommandsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link implParser#hardware}.
 	 * @param ctx the parse tree
@@ -166,4 +156,16 @@ public interface implListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNegation(implParser.NegationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Const}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterConst(implParser.ConstContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Const}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitConst(implParser.ConstContext ctx);
 }

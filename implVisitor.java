@@ -1,4 +1,4 @@
-// Generated from impl.g4 by ANTLR 4.10.1
+// Generated from C:/Users/Emjay/Desktop/HardwareSimulator\impl.g4 by ANTLR 4.10.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -15,12 +15,6 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStart(implParser.StartContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#commands}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCommands(implParser.CommandsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link implParser#hardware}.
 	 * @param ctx the parse tree
@@ -39,7 +33,10 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOutputs(implParser.OutputsContext ctx);
-	/**
+
+    AST visitOutputs(implParser.InputsContext ctx);
+
+    /**
 	 * Visit a parse tree produced by {@link implParser#latchDec}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -104,6 +101,13 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNegation(implParser.NegationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Const}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConst(implParser.ConstContext ctx);
 
-    AST visitExpr(implParser.ExprContext ctx);
+	AST visitExpr(implParser.ExprContext ctx);
 }

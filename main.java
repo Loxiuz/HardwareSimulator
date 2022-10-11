@@ -2,6 +2,8 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import org.antlr.v4.runtime.CharStreams;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class main {
     public static void main(String[] args) throws IOException{
@@ -45,19 +47,35 @@ public class main {
 
 class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<AST> {
 
-    public AST visitStart(implParser.StartContext ctx){return null;}
-	@Override
-	public AST visitCommands(implParser.CommandsContext ctx) {
-		return null;
+    public AST visitStart(implParser.StartContext ctx){return new Start ();
+
+
+
+
 	}
+
 	@Override
-	public AST visitHardware(implParser.HardwareContext ctx) {return null;}
+	public AST visitHardware(implParser.HardwareContext ctx) {return new Hardware(ctx.id.getText());}
 	@Override
-	public AST visitInputs(implParser.InputsContext ctx) {return null;}
+	public AST visitInputs(implParser.InputsContext ctx)
+	{
+		List<String>id = new ArrayList<String>();
+		for (Token t : ctx.id)
+			id.add(t.getText());
+		return new Inputs(id);}
 	@Override
-	public AST visitOutputs(implParser.OutputsContext ctx) {return null;}
+	public AST visitOutputs(implParser.OutputsContext ctx)
+	{
+		List<String>id = new ArrayList<String>();
+		for (Token t : ctx.id)
+			id.add(t.getText());
+		return new Inputs(id);}
+
+
+
 	@Override
-	public AST visitLatchDec(implParser.LatchDecContext ctx) {return null;}
+	public AST visitLatchDec(implParser.LatchDecContext ctx) {return new LatchDec(ctx.id1.getText(),ctx.id2.getText());}
+
 	@Override
 	public AST visitUpdate(implParser.UpdateContext ctx) {return null;}
 	@Override
@@ -86,13 +104,12 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	public AST visitNegation(implParser.NegationContext ctx) {
 		return null;
 	}
+
 	@Override
-	public AST visitExpr(implParser.ExprContext ctx) {
-		return null;
-	}
+	public AST visitConst(implParser.ConstContext ctx) {return null;}
+	@Override
+	public AST visitExpr(implParser.ExprContext ctx) {return null;}
 
-
-    //public Double visitExpr(implParser.ExprContext ctx){return null;};
 
 }
 

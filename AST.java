@@ -1,115 +1,67 @@
+import org.antlr.v4.runtime.Token;
+
+import java.util.List;
+
 public abstract class AST {}
 
 
-class start extends AST{}
-
-/*--------------------------------------------------*/
-
-abstract class Commands extends AST{
-    abstract public boolean eval();
+class Start extends AST{
+    List<String> inputs;
+}
+class Hardware extends AST {
+    public Hardware(String id) {
+        this.id = id;
+    }
+    String id;
 }
 
-class Hardware extends Commands {
+class Inputs extends AST {
+    List<String> id;
 
-    @Override
-    public boolean eval() {
-        return false;
+    public Inputs(List<String> id) {
+        this.id = id;
     }
 }
+class Outputs extends AST {
+    List<String> id;
 
-class Inputs extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
+    public Outputs(List<String> id) {
+        this.id = id;
     }
 }
+class LatchDec extends AST {
+    String id1;
+    String id2;
 
-class Outputs extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
+    public LatchDec(String id1, String id2) {
+        this.id1 = id1;
+        this.id2 = id2;
     }
+
+}
+class Update extends AST { }
+class UpdateDec extends AST { }
+class Simulate extends AST { }
+class Simlnp extends AST{
+    List<String>id;
+    public Simlnp(List<String>id) {
+        this.id = id;
+    }
+
 }
 
-class LatchDec extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
-    }
-}
-
-class Update extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
-    }
-}
-
-class UpdateDec extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
-    }
-}
-
-class Simulate extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
-    }
-}
-
-class Simlnp extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
-    }
-}
 
 /*--------------------------------------------------*/
 abstract class Expr extends AST {
     abstract public boolean eval();
 }
 
-class And extends Expr {
 
-    Expr e1;
-    Expr e2;
-
-    public And(Expr e1, Expr e2){
-        this.e1 = e1;
-        this.e2 = e2;
-    }
-    public boolean eval(){return e1.eval() && e2.eval();}
+class Const extends Expr{
+    public String id;
+    public Const (String id) {this.id = id;}
+    public String eval() {return id;}
 }
-    class Or extends Expr{
-
-        Expr e1;
-        Expr e2;
-
-        public Or(Expr e1, Expr e2){
-            this.e1 = e1;
-            this.e2 = e2;
-        }
-        public boolean eval(){return e1.eval() || e2.eval();}
-    }
-
-    class Negation extends Expr {
-
-        Expr e1;
-
-        public Negation(Expr e1){
-            this.e1 = e1;
-        }
-        public boolean eval(){return !e1.eval();}
-    }
     class Signal extends Expr {
 
     public Expr b1;
@@ -119,13 +71,32 @@ class And extends Expr {
     public boolean eval(){return b1.eval();}
 
     }
-    class Identifier {
+    class Variable {
 
         public String id;
 
-        public Identifier(String id) {this.id = id;}
+        public Variable(String id) {this.id = id;}
 
-        public String eval() {return id;}
+        public Boolean eval(Environment env){return env.getVariable(id);}
+
+class Negation extends Expr {
+
+    Expr e1;
+
+    public Negation(Expr e1){
+        this.e1 = e1;
     }
+    public boolean eval(Environment env){return env.getVariable(e1);}
 
+}
+
+class Condition extends Expr {
+
+    Expr e1;
+
+    public Condition (Expr e1){
+        this.e1 = e1;
+    }
+    public boolean eval(){return !e1.eval();}
+}
 /*--------------------------------------------------*/
