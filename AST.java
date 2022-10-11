@@ -2,100 +2,66 @@ public abstract class AST {}
 
 
 /*--------------------------------------------------*/
-abstract class Start extends AST{
-    abstract public boolean eval(Environment env);
-}
+abstract class Command extends AST{
 
-class Hardware extends Start {
+}
+class Hardware extends Command {
 
     String id;
 
     public Hardware(String id){
         this.id = id;
     }
-
-    @Override
-    public boolean eval(Environment env) {
-        return false;
-    }
 }
 
-class Inputs extends Start {
+class Inputs extends Command {
 
     Expr e;
 
     public Inputs(Expr e){
         this.e = e;
     }
-
-    @Override
-    public boolean eval(Environment env) {
-
-        return false;
-    }
 }
 
-class Outputs extends Start {
+class Outputs extends Command {
 
     String id;
 
-    public Outputs(){
+    public Outputs(String id){
         this.id = id;
-    }
-    @Override
-    public boolean eval(Environment env) {
-        return false;
     }
 }
 
-class LatchDec extends Start {
+class LatchDec extends Command {
     String id1, id2;
 
     public LatchDec(String id1, String id2){
         this.id1 = id1; this.id2 = id2;
     }
-
-    @Override
-    public boolean eval(Environment env) {
-        env.setVariable(id2, env.getVariable(id1));
-        return true;
-    }
 }
 
-class Update extends Start {
+class Update extends Command {
 
-    @Override
-    public boolean eval(Environment env) {
-        return false;
-    }
 }
 
-class UpdateDec extends Start {
+class UpdateDec extends Command {
 
     String id;
     Expr e;
 
     public UpdateDec(String id, Expr e){this.id = id; this.e = e;}
-    @Override
-    public boolean eval(Environment env) {env.setVariable(id, e.eval(env)); return true;}
 }
 
-class Simulate extends Start {
+class Simulate extends Command {
 
-    @Override
-    public boolean eval(Environment env) {
-        return false;
-    }
 }
 
-class Simlnp extends Start {
+class Simlnp extends Command {
 
     String id;
     Expr e;
 
     public Simlnp(String id, Expr e){this.id = id; this.e = e;}
-    @Override
-    public boolean eval(Environment env) {env.setVariable(id, e.eval(env)); return true;}
 
 }
 
