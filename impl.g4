@@ -1,22 +1,20 @@
 grammar impl;
 
-start   : commands EOF;
+start   : hardware inputs outputs latchDec update updateDec simulate simlnp EOF;
 
-commands: hardware inputs outputs latchDec update updateDec simulate simlnp;
-
-hardware: '.hardware' IDENTIFIER;
-inputs : '.inputs' e1 = expr;
-outputs: '.outputs' e1 = expr*;
-latchDec : ('.latch' e1 = expr '->' e2 = expr)*;
+hardware: '.hardware' id = IDENTIFIER;
+inputs : '.inputs' id = IDENTIFIER;
+outputs: '.outputs' id = IDENTIFIER*;
+latchDec : ('.latch' id1 = IDENTIFIER '->' id2 = IDENTIFIER)*;
 update:  '.update';
-updateDec: (x1 = IDENTIFIER '=' e1 = expr)*;
+updateDec: (id = IDENTIFIER '=' e = expr)*;
 simulate:'.simulate';
-simlnp: x1 = IDENTIFIER '=' e1 = expr*;
+simlnp: id = IDENTIFIER '=' e = expr;
 
-expr : '(' e1 = expr ')'                    #Parantheses
-     | b1 = ('0'|'1')                       #Signal
-     | x1 = IDENTIFIER                      #Variable
-     | '!' e1 = expr                        #Negation
+expr : '(' e = expr ')'                    #Parantheses
+     | (b = ('0'|'1'))+                    #Signal
+     | id = IDENTIFIER                      #Variable
+     | '!' e = expr                        #Negation
      | e1=expr con=('&&' | '||') e2=expr    #Condition
      ;
 

@@ -1,81 +1,107 @@
 public abstract class AST {}
 
 
-class start extends AST{}
-
 /*--------------------------------------------------*/
-
-abstract class Commands extends AST{
-    abstract public boolean eval();
+abstract class Start extends AST{
+    abstract public boolean eval(Environment env);
 }
 
-class Hardware extends Commands {
+class Hardware extends Start {
+
+    String id;
+
+    public Hardware(String id){
+        this.id = id;
+    }
 
     @Override
-    public boolean eval() {
+    public boolean eval(Environment env) {
         return false;
     }
 }
 
-class Inputs extends Commands {
+class Inputs extends Start {
+
+    Expr e;
+
+    public Inputs(Expr e){
+        this.e = e;
+    }
 
     @Override
-    public boolean eval() {
+    public boolean eval(Environment env) {
+
         return false;
     }
 }
 
-class Outputs extends Commands {
+class Outputs extends Start {
 
+    String id;
+
+    public Outputs(){
+        this.id = id;
+    }
     @Override
-    public boolean eval() {
+    public boolean eval(Environment env) {
         return false;
     }
 }
 
-class LatchDec extends Commands {
+class LatchDec extends Start {
+    String id1, id2;
+
+    public LatchDec(String id1, String id2){
+        this.id1 = id1; this.id2 = id2;
+    }
 
     @Override
-    public boolean eval() {
+    public boolean eval(Environment env) {
+        env.setVariable(id2, env.getVariable(id1));
+        return true;
+    }
+}
+
+class Update extends Start {
+
+    @Override
+    public boolean eval(Environment env) {
         return false;
     }
 }
 
-class Update extends Commands {
+class UpdateDec extends Start {
+
+    String id;
+    Expr e;
+
+    public UpdateDec(String id, Expr e){this.id = id; this.e = e;}
+    @Override
+    public boolean eval(Environment env) {env.setVariable(id, e.eval(env)); return true;}
+}
+
+class Simulate extends Start {
 
     @Override
-    public boolean eval() {
+    public boolean eval(Environment env) {
         return false;
     }
 }
 
-class UpdateDec extends Commands {
+class Simlnp extends Start {
 
+    String id;
+    Expr e;
+
+    public Simlnp(String id, Expr e){this.id = id; this.e = e;}
     @Override
-    public boolean eval() {
-        return false;
-    }
-}
+    public boolean eval(Environment env) {env.setVariable(id, e.eval(env)); return true;}
 
-class Simulate extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
-    }
-}
-
-class Simlnp extends Commands {
-
-    @Override
-    public boolean eval() {
-        return false;
-    }
 }
 
 /*--------------------------------------------------*/
 abstract class Expr extends AST {
-    abstract public boolean eval();
+    abstract public boolean eval(Environment env);
 }
 
 class And extends Expr {
@@ -87,7 +113,7 @@ class And extends Expr {
         this.e1 = e1;
         this.e2 = e2;
     }
-    public boolean eval(){return e1.eval() && e2.eval();}
+    public boolean eval(Environment env){return e1.eval(env) && e2.eval(env);}
 }
     class Or extends Expr{
 
@@ -98,7 +124,7 @@ class And extends Expr {
             this.e1 = e1;
             this.e2 = e2;
         }
-        public boolean eval(){return e1.eval() || e2.eval();}
+        public boolean eval(Environment env){return e1.eval(env) || e2.eval(env);}
     }
 
     class Negation extends Expr {
@@ -108,7 +134,7 @@ class And extends Expr {
         public Negation(Expr e1){
             this.e1 = e1;
         }
-        public boolean eval(){return !e1.eval();}
+        public boolean eval(Environment env){return !e1.eval(env);}
     }
     class Signal extends Expr {
 
@@ -116,7 +142,7 @@ class And extends Expr {
 
     public Signal(Expr b1){this.b1 = b1;}
 
-    public boolean eval(){return b1.eval();}
+    public boolean eval(Environment env){return b1.eval(env);}
 
     }
     class Identifier {
@@ -125,7 +151,7 @@ class And extends Expr {
 
         public Identifier(String id) {this.id = id;}
 
-        public String eval() {return id;}
+        public boolean eval(Environment env) {return env.getVariable(id);}
     }
 
 /*--------------------------------------------------*/

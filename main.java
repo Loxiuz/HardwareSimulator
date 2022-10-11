@@ -45,15 +45,15 @@ public class main {
 
 class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<AST> {
 
-    public AST visitStart(implParser.StartContext ctx){return null;}
+    public AST visitStart(implParser.StartContext ctx){return visit(ctx.commands());}
 	@Override
-	public AST visitCommands(implParser.CommandsContext ctx) {
-		return null;
-	}
+	public AST visitCommands(implParser.CommandsContext ctx) {return null;}
 	@Override
 	public AST visitHardware(implParser.HardwareContext ctx) {return null;}
 	@Override
-	public AST visitInputs(implParser.InputsContext ctx) {return null;}
+	public AST visitInputs(implParser.InputsContext ctx) {
+		return null;
+	}
 	@Override
 	public AST visitOutputs(implParser.OutputsContext ctx) {return null;}
 	@Override
