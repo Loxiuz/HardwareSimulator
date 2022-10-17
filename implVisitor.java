@@ -16,63 +16,26 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(implParser.StartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#hardware}.
+	 * Visit a parse tree produced by the {@code Latch}
+	 * labeled alternative in {@link implParser#latchDec}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHardware(implParser.HardwareContext ctx);
+	T visitLatch(implParser.LatchContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#inputs}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInputs(implParser.InputsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#outputs}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOutputs(implParser.OutputsContext ctx);
-
-    AST visitOutputs(implParser.InputsContext ctx);
-
-    /**
-	 * Visit a parse tree produced by {@link implParser#latchDec}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLatchDec(implParser.LatchDecContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#update}.
+	 * Visit a parse tree produced by the {@code Update}
+	 * labeled alternative in {@link implParser#updateDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitUpdate(implParser.UpdateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#updateDec}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUpdateDec(implParser.UpdateDecContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#simulate}.
+	 * Visit a parse tree produced by the {@code Simulate}
+	 * labeled alternative in {@link implParser#simlnp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSimulate(implParser.SimulateContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#simlnp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSimlnp(implParser.SimlnpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Condition}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCondition(implParser.ConditionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Parantheses}
 	 * labeled alternative in {@link implParser#expr}.
@@ -81,19 +44,19 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParantheses(implParser.ParanthesesContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Signal}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSignal(implParser.SignalContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitVariable(implParser.VariableContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code OR}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOR(implParser.ORContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Negation}
 	 * labeled alternative in {@link implParser#expr}.
@@ -102,12 +65,17 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNegation(implParser.NegationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Const}
+	 * Visit a parse tree produced by the {@code AND}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitConst(implParser.ConstContext ctx);
-
-	AST visitExpr(implParser.ExprContext ctx);
+	T visitAND(implParser.ANDContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SIGNALS}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSIGNALS(implParser.SIGNALSContext ctx);
 }

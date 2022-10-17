@@ -17,97 +17,41 @@ public interface implListener extends ParseTreeListener {
 	 */
 	void exitStart(implParser.StartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link implParser#hardware}.
+	 * Enter a parse tree produced by the {@code Latch}
+	 * labeled alternative in {@link implParser#latchDec}.
 	 * @param ctx the parse tree
 	 */
-	void enterHardware(implParser.HardwareContext ctx);
+	void enterLatch(implParser.LatchContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link implParser#hardware}.
+	 * Exit a parse tree produced by the {@code Latch}
+	 * labeled alternative in {@link implParser#latchDec}.
 	 * @param ctx the parse tree
 	 */
-	void exitHardware(implParser.HardwareContext ctx);
+	void exitLatch(implParser.LatchContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link implParser#inputs}.
-	 * @param ctx the parse tree
-	 */
-	void enterInputs(implParser.InputsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link implParser#inputs}.
-	 * @param ctx the parse tree
-	 */
-	void exitInputs(implParser.InputsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link implParser#outputs}.
-	 * @param ctx the parse tree
-	 */
-	void enterOutputs(implParser.OutputsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link implParser#outputs}.
-	 * @param ctx the parse tree
-	 */
-	void exitOutputs(implParser.OutputsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link implParser#latchDec}.
-	 * @param ctx the parse tree
-	 */
-	void enterLatchDec(implParser.LatchDecContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link implParser#latchDec}.
-	 * @param ctx the parse tree
-	 */
-	void exitLatchDec(implParser.LatchDecContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link implParser#update}.
+	 * Enter a parse tree produced by the {@code Update}
+	 * labeled alternative in {@link implParser#updateDecl}.
 	 * @param ctx the parse tree
 	 */
 	void enterUpdate(implParser.UpdateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link implParser#update}.
+	 * Exit a parse tree produced by the {@code Update}
+	 * labeled alternative in {@link implParser#updateDecl}.
 	 * @param ctx the parse tree
 	 */
 	void exitUpdate(implParser.UpdateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link implParser#updateDec}.
-	 * @param ctx the parse tree
-	 */
-	void enterUpdateDec(implParser.UpdateDecContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link implParser#updateDec}.
-	 * @param ctx the parse tree
-	 */
-	void exitUpdateDec(implParser.UpdateDecContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link implParser#simulate}.
+	 * Enter a parse tree produced by the {@code Simulate}
+	 * labeled alternative in {@link implParser#simlnp}.
 	 * @param ctx the parse tree
 	 */
 	void enterSimulate(implParser.SimulateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link implParser#simulate}.
+	 * Exit a parse tree produced by the {@code Simulate}
+	 * labeled alternative in {@link implParser#simlnp}.
 	 * @param ctx the parse tree
 	 */
 	void exitSimulate(implParser.SimulateContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link implParser#simlnp}.
-	 * @param ctx the parse tree
-	 */
-	void enterSimlnp(implParser.SimlnpContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link implParser#simlnp}.
-	 * @param ctx the parse tree
-	 */
-	void exitSimlnp(implParser.SimlnpContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Condition}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterCondition(implParser.ConditionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Condition}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitCondition(implParser.ConditionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Parantheses}
 	 * labeled alternative in {@link implParser#expr}.
@@ -121,18 +65,6 @@ public interface implListener extends ParseTreeListener {
 	 */
 	void exitParantheses(implParser.ParanthesesContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Signal}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterSignal(implParser.SignalContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Signal}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitSignal(implParser.SignalContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
@@ -144,6 +76,18 @@ public interface implListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVariable(implParser.VariableContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code OR}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterOR(implParser.ORContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code OR}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitOR(implParser.ORContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Negation}
 	 * labeled alternative in {@link implParser#expr}.
@@ -157,15 +101,27 @@ public interface implListener extends ParseTreeListener {
 	 */
 	void exitNegation(implParser.NegationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Const}
+	 * Enter a parse tree produced by the {@code AND}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterConst(implParser.ConstContext ctx);
+	void enterAND(implParser.ANDContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Const}
+	 * Exit a parse tree produced by the {@code AND}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitConst(implParser.ConstContext ctx);
+	void exitAND(implParser.ANDContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SIGNALS}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterSIGNALS(implParser.SIGNALSContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SIGNALS}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitSIGNALS(implParser.SIGNALSContext ctx);
 }

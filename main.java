@@ -4,6 +4,7 @@ import org.antlr.v4.runtime.CharStreams;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
 
 public class main {
     public static void main(String[] args) throws IOException{
@@ -47,7 +48,7 @@ public class main {
 
 class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<AST> {
 
-    public AST visitStart(implParser.StartContext ctx){return new Start ();
+    public AST visitStart(implParser.StartContext ctx){return null ;
 
 
 
@@ -55,66 +56,48 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	}
 
 	@Override
-	public AST visitHardware(implParser.HardwareContext ctx) {return new Hardware(ctx.id.getText());}
-	@Override
-	public AST visitInputs(implParser.InputsContext ctx)
-	{
-		List<String>id = new ArrayList<String>();
-		for (Token t : ctx.id)
-			id.add(t.getText());
-		return new Inputs(id);}
-
-	@Override
-	public AST visitOutputs(implParser.OutputsContext ctx) {
-		List<String>id = new ArrayList<String>();
-		for (Token t : ctx.id)
-			id.add(t.getText());
-		return new Outputs(id);}
-
-	@Override
-	public AST visitOutputs(implParser.InputsContext ctx) {
-		return null;
+	public AST visitLatch(implParser.LatchContext ctx) {return new Latch(ctx.id1.getText(),ctx.id2.getText());
 	}
-
-
-
-	@Override
-	public AST visitLatchDec(implParser.LatchDecContext ctx) {return new LatchDec(ctx.id1.getText(),ctx.id2.getText());}
 
 	@Override
 	public AST visitUpdate(implParser.UpdateContext ctx) {return null;}
+
 	@Override
-	public AST visitUpdateDec(implParser.UpdateDecContext ctx) {return null;}
+	public AST visitSimulate(implParser.SimulateContext ctx) {
+
+		List<String>id = new ArrayList<String>();
+		for (Token t : ctx.id)
+			id.add(t.getText());
+		return new Simlulate(id);}
+
+
+
 	@Override
-	public AST visitSimulate(implParser.SimulateContext ctx) {return null;}
+	public AST visitParantheses(implParser.ParanthesesContext ctx) {return new Parantheses(ctx.e1.getText());}
 	@Override
-	public AST visitSimlnp(implParser.SimlnpContext ctx) {return null;}
+	public AST visitSIGNALS(implParser.SIGNALSContext ctx) {return new Signal(ctx.c.getText());}
+
 	@Override
-	public AST visitCondition(implParser.ConditionContext ctx) {
-		return null;
-	}
-	@Override
-	public AST visitParantheses(implParser.ParanthesesContext ctx) {
-		return null;
-	}
-	@Override
-	public AST visitSignal(implParser.SignalContext ctx) {
-		return null;
-	}
-	@Override
-	public AST visitVariable(implParser.VariableContext ctx) {
-		return null;
-	}
+	public AST visitVariable(implParser.VariableContext ctx) {return new Variable(ctx.id.getText());}
+
 	@Override
 	public AST visitNegation(implParser.NegationContext ctx) {
-		return null;
+		Expr e1 = (Expr) visit(ctx.e1);
+			return new Negation(e1);
 	}
 
 	@Override
-	public AST visitConst(implParser.ConstContext ctx) {return null;}
+	public AST visitAND(implParser.ANDContext ctx) {
+		Expr e1=(Expr) visit(ctx.expr(1));
+		Expr e2=(Expr) visit(ctx.expr(0));
+		return new AND(e1,e2);
+	}
 	@Override
-	public AST visitExpr(implParser.ExprContext ctx) {return null;}
-
+	public AST visitOR(implParser.ORContext ctx) {
+			Expr e1=(Expr) visit(ctx.expr(1));
+		    Expr e2=(Expr) visit(ctx.expr(0));
+		return new OR(e1,e2);
+	}
 
 }
 
