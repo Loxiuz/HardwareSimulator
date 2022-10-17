@@ -6,7 +6,7 @@ public abstract class AST {}
 
 
 class Start extends AST{
-    List<String> inputs;
+    //List<String> inputs;
 }
 class Hardware extends AST {
     public Hardware(String id) {
@@ -71,6 +71,7 @@ class Const extends Expr{
     public boolean eval(){return b1.eval();}
 
     }
+    //true
     class Variable {
 
         public String id;

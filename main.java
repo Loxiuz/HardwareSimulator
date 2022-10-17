@@ -63,13 +63,18 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 		for (Token t : ctx.id)
 			id.add(t.getText());
 		return new Inputs(id);}
+
 	@Override
-	public AST visitOutputs(implParser.OutputsContext ctx)
-	{
+	public AST visitOutputs(implParser.OutputsContext ctx) {
 		List<String>id = new ArrayList<String>();
 		for (Token t : ctx.id)
 			id.add(t.getText());
 		return new Outputs(id);}
+
+	@Override
+	public AST visitOutputs(implParser.InputsContext ctx) {
+		return null;
+	}
 
 
 
