@@ -27,37 +27,37 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLatchDec(implParser.LatchDecContext ctx) { }
+	@Override public void enterLatch(implParser.LatchContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLatchDec(implParser.LatchDecContext ctx) { }
+	@Override public void exitLatch(implParser.LatchContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUpdateDecl(implParser.UpdateDeclContext ctx) { }
+	@Override public void enterUpdate(implParser.UpdateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUpdateDecl(implParser.UpdateDeclContext ctx) { }
+	@Override public void exitUpdate(implParser.UpdateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSimlnp(implParser.SimlnpContext ctx) { }
+	@Override public void enterSimulate(implParser.SimulateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSimlnp(implParser.SimlnpContext ctx) { }
+	@Override public void exitSimulate(implParser.SimulateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -87,18 +87,6 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSignal(implParser.SignalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSignal(implParser.SignalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterVariable(implParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -123,13 +111,13 @@ public class implBaseListener implements implListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConst(implParser.ConstContext ctx) { }
+	@Override public void enterSignals(implParser.SignalsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConst(implParser.ConstContext ctx) { }
+	@Override public void exitSignals(implParser.SignalsContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
