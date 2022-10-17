@@ -1,27 +1,42 @@
 grammar impl;
 
-start: command* EOF;
+start   : //hardware inputs outputs latchDec* update updateDec* simulate* simlnp EOF;
 
-  command : '.hardware' id = IDENTIFIER                         #Hardware
-          | '.inputs' id = IDENTIFIER                           #Inputs
-          | '.outputs' id = IDENTIFIER*                         #Outputs
-          | '.update'                                           #Update
-          | '.simulate'                                         #Simulate
-          | '.simapl' id = IDENTIFIER '=' e = expr              #Simapl
-          | '.latch' id1 = IDENTIFIER '->' id2 = IDENTIFIER     #Latch
-          | id = IDENTIFIER '=' e = expr                        #Assigment
-          ;
+'.hardware'id= IDENTIFIER
+'.inputs' id1 += IDENTIFIER+
+'.outputs' id2 += IDENTIFIER+
+latchDec+
+'.update'
+updateDecl+
+'.simulate'
+ simlnp+
+;
 
-expr : '(' e = expr ')'                    #Parantheses
-     | (b = ('0'|'1'))+                    #Signal
-     | c = CONST                           #Constant
-     | id = IDENTIFIER                     #Variable
-     | '!' e = expr                        #Negation
-     | e1=expr con=('&&' | '||') e2=expr   #Condition
+/*hardware: '.hardware'id= IDENTIFIER;
+  inputs : '.inputs' id += IDENTIFIER+;
+  outputs: '.outputs' id += IDENTIFIER+;
+  latchDec :'.latch' id1 = IDENTIFIER '->' id2 = IDENTIFIER;
+  update:  '.update';
+  updateDec: x1 = IDENTIFIER '=' e1 = expr;
+  simulate:'.simulate';
+  simlnp: x1 = IDENTIFIER '=' c=CONST;
+  */
+
+latchDec :'.latch' id1 = IDENTIFIER '->' id2 = IDENTIFIER  ;
+updateDecl: x1 = IDENTIFIER '=' e1 = expr                   ;
+simlnp: id=IDENTIFIER '=' c=CONST                             ;
+
+
+expr : '(' e1 = expr ')'                    #Parantheses
+     | b1 = ('0'|'1')                       #Signal
+     | c=CONST                              #Const
+     | x1 = IDENTIFIER                      #Variable
+     | '!' e1 = expr                        #Negation
+     | e1=expr con=('&&' | '||') e2=expr    #Condition
      ;
 
 IDENTIFIER : [a-zA-Z_] [a-zA-Z0-9_]*;
-CONST: [0-9]+;
+CONST : [0-9]*;
 HVIDRUM : [ \t\n]+ -> skip ;
 KOMMENTAR : '//' ~[\n]* -> skip ;
 MULTILINECOMMENTS :  '/*'  ( '*'~[/] | ~[*]  )* '*/' -> skip; 
