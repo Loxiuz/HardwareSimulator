@@ -45,37 +45,35 @@ public class main {
 
 class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<AST> {
 
-    public AST visitStart(implParser.StartContext ctx){return visit(ctx.commands());}
+    public AST visitStart(implParser.StartContext ctx){return null;}
+
 	@Override
-	public AST visitCommands(implParser.CommandsContext ctx) {return null;}
-	@Override
-	public AST visitHardware(implParser.HardwareContext ctx) {return null;}
-	@Override
-	public AST visitInputs(implParser.InputsContext ctx) {
+	public AST visitLatch(implParser.LatchContext ctx) {
+		return null;
+	}
+	public AST visitLatchDec(implParser.LatchDecContext ctx) {
 		return null;
 	}
 	@Override
-	public AST visitOutputs(implParser.OutputsContext ctx) {return null;}
+	public AST visitUpdate(implParser.UpdateContext ctx) {
+		return null;
+	}
+	public AST visitUpdateDec(implParser.UpdateDeclContext ctx) {
+		return null;
+	}
 	@Override
-	public AST visitLatchDec(implParser.LatchDecContext ctx) {return null;}
-	@Override
-	public AST visitUpdate(implParser.UpdateContext ctx) {return null;}
-	@Override
-	public AST visitUpdateDec(implParser.UpdateDecContext ctx) {return null;}
-	@Override
-	public AST visitSimulate(implParser.SimulateContext ctx) {return null;}
-	@Override
-	public AST visitSimlnp(implParser.SimlnpContext ctx) {return null;}
+	public AST visitSimulate(implParser.SimulateContext ctx) {
+		return null;
+	}
+	public AST visitSimlnp(implParser.SimlnpContext ctx) {
+		return null;
+	}
 	@Override
 	public AST visitCondition(implParser.ConditionContext ctx) {
 		return null;
 	}
 	@Override
 	public AST visitParantheses(implParser.ParanthesesContext ctx) {
-		return null;
-	}
-	@Override
-	public AST visitSignal(implParser.SignalContext ctx) {
 		return null;
 	}
 	@Override
@@ -87,12 +85,12 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 		return null;
 	}
 	@Override
+	public AST visitSignals(implParser.SignalsContext ctx) {
+		return null;
+	}
 	public AST visitExpr(implParser.ExprContext ctx) {
 		return null;
 	}
-
-
-    //public Double visitExpr(implParser.ExprContext ctx){return null;};
 
 }
 
