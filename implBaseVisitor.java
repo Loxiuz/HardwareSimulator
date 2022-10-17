@@ -23,34 +23,6 @@ public class implBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCommands(implParser.CommandsContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitHardware(implParser.HardwareContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitInputs(implParser.InputsContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitOutputs(implParser.OutputsContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitLatchDec(implParser.LatchDecContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -58,21 +30,7 @@ public class implBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUpdate(implParser.UpdateContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitUpdateDec(implParser.UpdateDecContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitSimulate(implParser.SimulateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUpdateDecl(implParser.UpdateDeclContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -115,9 +73,11 @@ public class implBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements i
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitNegation(implParser.NegationContext ctx) { return visitChildren(ctx); }
-
-	@Override
-	public AST visitExpr(implParser.ExprContext ctx) {
-		return null;
-	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitConst(implParser.ConstContext ctx) { return visitChildren(ctx); }
 }

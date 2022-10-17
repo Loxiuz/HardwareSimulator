@@ -16,53 +16,17 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(implParser.StartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#commands}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCommands(implParser.CommandsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#hardware}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitHardware(implParser.HardwareContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#inputs}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInputs(implParser.InputsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#outputs}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOutputs(implParser.OutputsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link implParser#latchDec}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitLatchDec(implParser.LatchDecContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#update}.
+	 * Visit a parse tree produced by {@link implParser#updateDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUpdate(implParser.UpdateContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#updateDec}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUpdateDec(implParser.UpdateDecContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link implParser#simulate}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSimulate(implParser.SimulateContext ctx);
+	T visitUpdateDecl(implParser.UpdateDeclContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link implParser#simlnp}.
 	 * @param ctx the parse tree
@@ -104,6 +68,11 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNegation(implParser.NegationContext ctx);
-
-    AST visitExpr(implParser.ExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Const}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConst(implParser.ConstContext ctx);
 }
