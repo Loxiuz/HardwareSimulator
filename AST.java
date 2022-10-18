@@ -44,12 +44,12 @@ class Update extends Command {
 
 }
 
-class UpdateDec extends Command {
+class UpdateDecl extends Command {
 
     String id;
     Expr e;
 
-    public UpdateDec(String id, Expr e){this.id = id; this.e = e;}
+    public UpdateDecl(String id, Expr e){this.id = id; this.e = e;}
 }
 
 class Simulate extends Command {
