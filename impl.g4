@@ -9,7 +9,7 @@ start :  '.hardware'id= IDENTIFIER
          EOF
         ;
 
-latchDec :'.latch' id1 = IDENTIFIER '->' id2 = IDENTIFIER  #Latch;
+latchDec :'.latch' id1 = expr '->' id2 = expr  #Latch;
 updateDecl: x1 = IDENTIFIER '=' e1 = expr                  #Update;
 simlnp: id=IDENTIFIER '=' c=SIGNALS                        #Simulate;
 

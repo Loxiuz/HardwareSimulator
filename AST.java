@@ -1,37 +1,41 @@
 import java.util.List;
 
 public abstract class AST {
+    abstract void eval(Environment env);
 }
 
 
-abstract class Start extends AST{
+ abstract class Start extends AST{
 
     String hardware;
     List<String> inputs;
     List<String> outputs;
-    String latch;
+    Latch latch;
     List<String> simlulate;
 
-    public Start(String hardware, List<String> inputs, List<String> outputs, String latch, List<String> simlulate) {
-        this.hardware = hardware;
-        this.inputs = inputs;
-        this.outputs = outputs;
-        this.latch = latch;
-        this.simlulate = simlulate;
+     public Start(String hardware, List<String> inputs, List<String> outputs, Latch latch, List<String> simlulate) {
+         this.hardware = hardware;
+         this.inputs = inputs;
+         this.outputs = outputs;
+         this.latch = latch;
+         this.simlulate = simlulate;
+     }
+
+    public void eval(Environment env){
 
     }
-    abstract public boolean eval(Environment env);
 }
 
-class Latch extends AST {
+
+class Latch extends Start {
     String id1;
     String id2;
 
-    public Latch(String id1, String id2) {
-        this.id1 = id1;
-        this.id2 = id2;
-    }
-
+    public Latch(String id1, String id2) {this.id1 = id1;this.id2 = id2;}
+     public void  eval(Environment env){
+         id1.eval(env);
+         id2.eval(env);
+     }
 }
 class Update extends AST {
     String x1;
@@ -40,7 +44,9 @@ class Update extends AST {
         this.x1 = x1;
         this.e1 = e1;
     }
-
+    public boolean eval(Environment env){
+        env.setVariable(varname,e.eval(env));
+    }
 }
 
 class Simulate extends AST{
@@ -67,9 +73,9 @@ class Parantheses extends Expr{
 
 }
 class Signal extends Expr{
-    public String c;
-    public Signal (String c) {this.c = c;}
-        public boolean eval(Environment env){return env.getVariable(c);}
+    public Boolean c;
+    public Signal (Boolean c) {this.c = c;}
+        public boolean eval(Environment env){return c;}
 
     class Variable extends Expr {
         public String id;
