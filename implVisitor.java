@@ -16,23 +16,26 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(implParser.StartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#latchDec}.
+	 * Visit a parse tree produced by the {@code Latch}
+	 * labeled alternative in {@link implParser#latchDec}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLatchDec(implParser.LatchDecContext ctx);
+	T visitLatch(implParser.LatchContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#updateDecl}.
+	 * Visit a parse tree produced by the {@code Update}
+	 * labeled alternative in {@link implParser#updateDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUpdateDecl(implParser.UpdateDeclContext ctx);
+	T visitUpdate(implParser.UpdateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link implParser#simlnp}.
+	 * Visit a parse tree produced by the {@code Simulate}
+	 * labeled alternative in {@link implParser#simlnp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSimlnp(implParser.SimlnpContext ctx);
+	T visitSimulate(implParser.SimulateContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Condition}
 	 * labeled alternative in {@link implParser#expr}.
@@ -48,13 +51,6 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParantheses(implParser.ParanthesesContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Signal}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSignal(implParser.SignalContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Variable}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
@@ -69,10 +65,10 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNegation(implParser.NegationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Const}
+	 * Visit a parse tree produced by the {@code Signals}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitConst(implParser.ConstContext ctx);
+	T visitSignals(implParser.SignalsContext ctx);
 }
