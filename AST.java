@@ -1,123 +1,116 @@
-public abstract class AST {}
+import java.util.List;
 
-
-/*--------------------------------------------------*/
-abstract class Command extends AST{
-
-}
-class Hardware extends Command {
-
-    String id;
-
-    public Hardware(String id){
-        this.id = id;
-    }
+public abstract class AST {
+    abstract void eval(Environment env);
 }
 
-class Inputs extends Command {
 
-    Expr e;
+    abstract class Start extends AST{
 
-    public Inputs(Expr e){
-        this.e = e;
-    }
-}
+        String hardware;
+        List<String> inputs;
+        List<String> outputs;
+        Latch latch;
+        List<String> simlulate;
 
-class Outputs extends Command {
+     public Start(String hardware, List<String> inputs, List<String> outputs, Latch latch, List<String> simlulate) {
+                this.hardware = hardware;
+                this.inputs = inputs;
+                this.outputs = outputs;
+                this.latch = latch;
+                this.simlulate = simlulate;
+            }
 
-    String id;
+            public void eval(Environment env){
 
-    public Outputs(String id){
-        this.id = id;
-    }
-}
-
-class LatchDec extends Command {
-    String id1, id2;
-
-    public LatchDec(String id1, String id2){
-        this.id1 = id1; this.id2 = id2;
-    }
-}
-
-class Update extends Command {
-
-}
-
-class UpdateDecl extends Command {
-
-    String id;
-    Expr e;
-
-    public UpdateDecl(String id, Expr e){this.id = id; this.e = e;}
-}
-
-class Simulate extends Command {
-
-}
-
-class Simlnp extends Command {
-
-    String id;
-    Expr e;
-
-    public Simlnp(String id, Expr e){this.id = id; this.e = e;}
-
-}
-
-/*--------------------------------------------------*/
-abstract class Expr extends AST {
-    abstract public boolean eval(Environment env);
-}
-
-class And extends Expr {
-
-    Expr e1;
-    Expr e2;
-
-    public And(Expr e1, Expr e2){
-        this.e1 = e1;
-        this.e2 = e2;
-    }
-    public boolean eval(Environment env){return e1.eval(env) && e2.eval(env);}
-}
-    class Or extends Expr{
-
-        Expr e1;
-        Expr e2;
-
-        public Or(Expr e1, Expr e2){
-            this.e1 = e1;
-            this.e2 = e2;
+            }
         }
-        public boolean eval(Environment env){return e1.eval(env) || e2.eval(env);}
-    }
 
-    class Negation extends Expr {
 
-        Expr e1;
 
-        public Negation(Expr e1){
-            this.e1 = e1;
-        }
-        public boolean eval(Environment env){return !e1.eval(env);}
-    }
-    class Signal extends Expr {
+            class Latch extends Start {
+                String id1;
+                String id2;
 
-    public Expr b1;
+                public Latch(String id1, String id2) {this.id1 = id1;this.id2 = id2;}
+                public void  eval(Environment env){
+                    id1.eval(env);
+                    id2.eval(env);
+                }
+            }
+            class Update extends AST {
+                String x1;
+                Expr e1;
+                public Update(String x1, Expr e1) {
+                    this.x1 = x1;
+                    this.e1 = e1;
+                }
 
-    public Signal(Expr b1){this.b1 = b1;}
+                public boolean eval(Environment env){
+                    env.setVariable(varname,e.eval(env));
+                }
+            }
 
-    public boolean eval(Environment env){return b1.eval(env);}
+            class Simulate extends AST{
+                List<String>id;
+                List<String>c;
 
-    }
-    class Identifier {
+                public Simulate(List<String> id, List<String> c) {
+                    this.id = id;
+                    this.c = c;
+                }
 
-        public String id;
+            }
 
-        public Identifier(String id) {this.id = id;}
 
-        public boolean eval(Environment env) {return env.getVariable(id);}
-    }
+            /*------------------------------------------------EXPR */
+            abstract class Expr extends AST {
+                abstract public boolean eval(Environment env);
+            }
+            class Parantheses extends Expr{
+                Expr e1;
+                public Parantheses(Expr e1) {this.e1 = e1;}
 
-/*--------------------------------------------------*/
+                public boolean eval(Environment env){return env.getVariable(e1);}
+
+            }
+            class Signal extends Expr{
+                public Boolean c;
+                public Signal (Boolean c) {this.c = c;}
+                public boolean eval(Environment env){return c;}
+
+                class Variable extends Expr {
+                    public String id;
+
+                    public Variable(String id) {this.id = id;}
+
+                    public boolean eval(Environment env) {
+
+                        return env.getVariable(id);}
+                }
+                class Negation extends Expr {
+                    Expr e1;
+                    public Negation(Expr e1){
+                        this.e1 = e1;
+                    }
+                    public boolean eval(Environment env){return !e1.eval(env);}
+                }
+
+
+                class AND extends Expr {
+                    Expr e1, e2;
+                    public AND (Expr e1, Expr e2) {this.e1 = e1; this.e2 = e2;}
+                    public boolean eval (Environment env)
+                    {return e1.eval(env)  && (e2.eval(env));}
+                }
+
+                class OR extends Expr {
+                    Expr e1, e2;
+                    public OR (Expr e1, Expr e2) {this.e1 = e1; this.e2 = e2;}
+                    public boolean eval (Environment env)
+                    {return e1.eval(env)  || (e2.eval(env));}
+                }
+
+
+            }
+

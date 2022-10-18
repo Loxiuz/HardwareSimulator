@@ -37,13 +37,6 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSimulate(implParser.SimulateContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Condition}
-	 * labeled alternative in {@link implParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCondition(implParser.ConditionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Parantheses}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
@@ -58,6 +51,13 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable(implParser.VariableContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code OR}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOR(implParser.ORContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Negation}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
@@ -65,10 +65,17 @@ public interface implVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNegation(implParser.NegationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Signals}
+	 * Visit a parse tree produced by the {@code AND}
 	 * labeled alternative in {@link implParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSignals(implParser.SignalsContext ctx);
+	T visitAND(implParser.ANDContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SIGNALS}
+	 * labeled alternative in {@link implParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSIGNALS(implParser.SIGNALSContext ctx);
 }
