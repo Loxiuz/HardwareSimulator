@@ -1,13 +1,12 @@
 grammar impl;
 
 start :  '.hardware'id= IDENTIFIER
-         '.inputs' id1 += IDENTIFIER
-         '.outputs' id2 += IDENTIFIER
-          latchDec+
-         '.update'
-          updateDecl+
-         '.simulate'
-          simlnp+
+         '.inputs' id1 += IDENTIFIER+
+         '.outputs' id2 += IDENTIFIER+
+          latch+=latchDec+
+         '.update'update+= updateDecl+
+         '.simulate'simulate+=simlnp+
+         EOF
         ;
 
 latchDec :'.latch' id1 = IDENTIFIER '->' id2 = IDENTIFIER  #Latch;

@@ -48,7 +48,12 @@ public class main {
 
 class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<AST> {
 
-    public AST visitStart(implParser.StartContext ctx){return null ;
+    public AST visitStart(implParser.StartContext ctx){
+
+		Command program = new NOP();
+		for (implParser.CommandContext c : ctx.cs)
+			program = new Sequence(program, (Command) visit(c));
+		return program;
 
 
 
@@ -65,10 +70,12 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	@Override
 	public AST visitSimulate(implParser.SimulateContext ctx) {
 
-		List<String>id = new ArrayList<String>();
-		for (Token t : ctx.id)
+		List<String> id = new ArrayList<String>();
+		for (Token t : ctx.id) {
 			id.add(t.getText());
-		return new Simlulate(id);}
+		}
+		return new Simlulate(id);
+	}
 
 
 

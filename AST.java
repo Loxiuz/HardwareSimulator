@@ -1,9 +1,10 @@
 import java.util.List;
 
-public abstract class AST {}
+public abstract class AST {
+}
 
 
-class Start extends AST{
+abstract class Start extends AST{
 
     String hardware;
     List<String> inputs;
@@ -17,8 +18,9 @@ class Start extends AST{
         this.outputs = outputs;
         this.latch = latch;
         this.simlulate = simlulate;
-    }
 
+    }
+    abstract public boolean eval(Environment env);
 }
 
 class Latch extends AST {
@@ -33,8 +35,8 @@ class Latch extends AST {
 }
 class Update extends AST {
     String x1;
-    String e1;
-    public Update(String x1, String e1) {
+    Expr e1;
+    public Update(String x1, Expr e1) {
         this.x1 = x1;
         this.e1 = e1;
     }
@@ -43,8 +45,11 @@ class Update extends AST {
 
 class Simulate extends AST{
     List<String>id;
-    public Simulate(List<String>id) {
+    List<String>c;
+
+    public Simulate(List<String> id, List<String> c) {
         this.id = id;
+        this.c = c;
     }
 
 }
@@ -71,7 +76,9 @@ class Signal extends Expr{
 
         public Variable(String id) {this.id = id;}
 
-        public boolean eval(Environment env) {return env.getVariable(id);}
+        public boolean eval(Environment env) {
+
+            return env.getVariable(id);}
     }
 class Negation extends Expr {
     Expr e1;
