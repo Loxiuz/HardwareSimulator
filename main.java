@@ -50,15 +50,22 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 
     public AST visitStart(implParser.StartContext ctx){
 
-		Command program = new NOP();
-		for (implParser.CommandContext c : ctx.cs)
-			program = new Sequence(program, (Command) visit(c));
-		return program;
+		Start start = new Hardware(ctx.id.getText());
 
+		List<String>id = new ArrayList<String>();
+		for (Token t : ctx.id)
+			id.add(t.getText());
+		return new Inputs(id);
 
+     	List<String>id = new ArrayList<String>();
+		for (Token t : ctx.id)
+			id.add(t.getText());
+		return new Outputs(id);
 
 
 	}
+
+
 
 	@Override
 	public AST visitLatch(implParser.LatchContext ctx) {return new Latch(ctx.id1.getText(),ctx.id2.getText());
