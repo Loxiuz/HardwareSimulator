@@ -46,14 +46,30 @@ public class main {
 class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<AST> {
 
     public AST visitStart(implParser.StartContext ctx){return null;}
-	@Override
-	public AST visitLatchDec(implParser.LatchDecContext ctx) {return null;}
 
 	@Override
+	public AST visitLatch(implParser.LatchContext ctx) {
+		return null;
+	}
+
+	@Override
+	public AST visitUpdate(implParser.UpdateContext ctx) {
+		return null;
+	}
+
+	@Override
+	public AST visitSimulate(implParser.SimulateContext ctx) {
+		return null;
+	}
+
+
+	public AST visitLatchDec(implParser.LatchDecContext ctx) {return null;}
+
+
 	public AST visitUpdateDecl(implParser.UpdateDeclContext ctx) {
 		return null;
 	}
-	@Override
+
 	public AST visitSimlnp(implParser.SimlnpContext ctx) {return null;}
 	@Override
 	public AST visitCondition(implParser.ConditionContext ctx) {
@@ -63,10 +79,7 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	public AST visitParantheses(implParser.ParanthesesContext ctx) {
 		return null;
 	}
-	@Override
-	public AST visitSignal(implParser.SignalContext ctx) {
-		return null;
-	}
+
 	@Override
 	public AST visitVariable(implParser.VariableContext ctx) {
 		return null;
@@ -77,9 +90,10 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	}
 
 	@Override
-	public AST visitConst(implParser.ConstContext ctx) {
+	public AST visitSignals(implParser.SignalsContext ctx) {
 		return null;
 	}
+
 
 	public AST visitExpr(implParser.ExprContext ctx) {
 		return null;
