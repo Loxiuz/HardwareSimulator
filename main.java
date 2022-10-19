@@ -50,7 +50,7 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 
     public AST visitStart(implParser.StartContext ctx){
 
-		Start start = new Hardware(ctx.id.getText());
+/*
 
 		List<String>id = new ArrayList<String>();
 		for (Token t : ctx.id)
@@ -61,7 +61,7 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 		for (Token t : ctx.id)
 			id.add(t.getText());
 		return new Outputs(id);
-
+*/
 
 	}
 
@@ -87,30 +87,34 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 
 
 	@Override
-	public AST visitParantheses(implParser.ParanthesesContext ctx) {return new Parantheses(ctx.e1.getText());}
+	public AST visitParantheses(implParser.ParanthesesContext ctx) {return new Parantheses((Expr) visit(ctx.e1));}
 	@Override
-	public AST visitSIGNALS(implParser.SIGNALSContext ctx) {return new Signal(ctx.c.getText());}
+	public AST visitSIGNALS(implParser.SIGNALSContext ctx) {return new Signal (ctx.c.getText());}
 
 	@Override
-	public AST visitVariable(implParser.VariableContext ctx) {return new Variable(ctx.id.getText());}
+	public AST visitVariable(implParser.VariableContext ctx) {return new Variable(ctx.getText());}
 
 	@Override
 	public AST visitNegation(implParser.NegationContext ctx) {
-		Expr e1 = (Expr) visit(ctx.e1);
-			return new Negation(e1);
+		return new Negation((Expr) visit (ctx.e1));
+		 //Expr e1 = (Expr) visit(ctx.e1);
+		//	return new Negation(e1);
 	}
 
 	@Override
 	public AST visitAND(implParser.ANDContext ctx) {
-		Expr e1=(Expr) visit(ctx.expr(1));
-		Expr e2=(Expr) visit(ctx.expr(0));
-		return new AND(e1,e2);
+		return new AND ((Expr) visit(ctx.expr(1)) , (Expr)  visit(ctx.expr(0)) );
+		//Expr e1=(Expr) visit(ctx.expr(1));
+		// 	Expr e2=(Expr) visit(ctx.expr(0));
+		//return new AND(e1,e2);
 	}
 	@Override
 	public AST visitOR(implParser.ORContext ctx) {
-			Expr e1=(Expr) visit(ctx.expr(1));
-		    Expr e2=(Expr) visit(ctx.expr(0));
-		return new OR(e1,e2);
+
+		return new AND ((Expr) visit(ctx.expr(1)) , (Expr)  visit(ctx.expr(0)) );
+			//Expr e1=(Expr) visit(ctx.expr(1));
+		    //Expr e2=(Expr) visit(ctx.expr(0));
+		    //return new OR(e1,e2);
 	}
 
 }
