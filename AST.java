@@ -27,6 +27,8 @@ public Boolean bool;       // only valid if value type is boolean
     }
 
 }
+
+
 public abstract class AST {
     abstract Boolean eval(Environment env);
     abstract public Type typecheck(Environment env);
@@ -46,15 +48,13 @@ public abstract class AST {
          this.hardware = hardware;
          this.inputs = inputs;
          this.outputs = outputs;
-        // this.latch = latch;
+         this.latch = latch;
          this.update = update;
          this.simlulate = simlulate;
      }
 
-
-
      public Boolean eval(Environment env){
-
+        for (String inputs: inputs )
          return null;
      }
      public Type typecheck(Environment env) {return ;}
@@ -62,7 +62,7 @@ public abstract class AST {
 }
 
 
-class Latch extends Start {
+class Latch extends AST {
     String id1;
     String id2;
 
@@ -70,10 +70,11 @@ class Latch extends Start {
 
 
 
-    public Boolean eval(Environment env){env.setVariable(id1,id2);
+    public Boolean eval(Environment env){env.getVariable(id1);
+
          return ;
      }
-    public Type typecheck(Environment env) {return ;}
+    public Type typecheck(Environment env) {return env.getVariable(id1).valueType;}
 
      }
 
@@ -87,8 +88,9 @@ class Update extends AST {
     }
 
     public Boolean eval(Environment env) {
-        Boolean b = env.getVariable(x1);
-        return b;
+        Boolean a = env.setVariable(x1,e1.eval(env));
+        while
+       return a;
     }
 
     public Type typecheck(Environment env) {
@@ -103,9 +105,9 @@ class Update extends AST {
 
     class Simulate extends AST {
         String id;
-        List<String> c;
+        String c;
 
-        public Simulate(String id, List<String> c) {
+        public Simulate(String id, String c) {
             this.id = id;
             this.c = c;
         }
@@ -113,9 +115,9 @@ class Update extends AST {
         public Boolean eval(Environment env) {
             env.getVariable(id);
 
-
-            return null;
+            return ;
         }
+        public Type typecheck(Environment env) {return env.getVariable(c).valueType;}
     }
 
 
@@ -188,12 +190,19 @@ class Negation extends Expr {
 
 class AND extends Expr {
     Expr e1, e2;
-    public AND (Expr e1, Expr e2) {this.e1 = e1; this.e2 = e2;}
-        public Boolean eval (Environment env) {
+
+    public AND(Expr e1, Expr e2) {
+        this.e1 = e1;
+        this.e2 = e2;
+    }
+
+    public Boolean eval(Environment env) {
         Boolean b1 = e1.eval(env);
         Boolean b2 = e2.eval(env);
-        return new Boolean ( b1.bool && b2.bool ));}
-         //   return e1.eval(env)  && (e2.eval(env));}
+        return new Boolean((b1.bool) && (b2.bool));
+    }
+    //   return e1.eval(env)  && (e2.eval(env));}
+}
 
     public Type typecheck(Environment env){
         Type bool1 =e1.typecheck(env);

@@ -48,10 +48,10 @@ public class main {
 
 class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<AST> {
 
-    public AST visitStart(implParser.StartContext ctx){
+	public AST visitStart(implParser.StartContext ctx) {
+
 
 /*
-
 		List<String>id = new ArrayList<String>();
 		for (Token t : ctx.id)
 			id.add(t.getText());
@@ -66,23 +66,30 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	}
 
 
-
 	@Override
-	public AST visitLatch(implParser.LatchContext ctx) {return new Latch(ctx.id1.getText(),ctx.id2.getText());
+	public AST visitLatch(implParser.LatchContext ctx) {
+		return new Latch(ctx.id1.getText(), ctx.id2.getText());
 	}
 
 	@Override
-	public AST visitUpdate(implParser.UpdateContext ctx) {return null;}
+	public AST visitUpdate(implParser.UpdateContext ctx) {
+		return new Update(ctx.x1.getText(), (Expr) visit(ctx.e1));
+	}
 
 	@Override
 	public AST visitSimulate(implParser.SimulateContext ctx) {
+		return new Simulate(ctx.id.getText(), ctx.c.getText());
+	}
 
+		/*
 		List<String> id = new ArrayList<String>();
 		for (Token t : ctx.id) {
 			id.add(t.getText());
 		}
 		return new Simlulate(id);
-	}
+
+		 */
+
 
 
 
@@ -110,8 +117,7 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	}
 	@Override
 	public AST visitOR(implParser.ORContext ctx) {
-
-		return new AND ((Expr) visit(ctx.expr(1)) , (Expr)  visit(ctx.expr(0)) );
+		return new OR ((Expr) visit(ctx.expr(1)) , (Expr)  visit(ctx.expr(0)) );
 			//Expr e1=(Expr) visit(ctx.expr(1));
 		    //Expr e2=(Expr) visit(ctx.expr(0));
 		    //return new OR(e1,e2);

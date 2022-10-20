@@ -4,9 +4,10 @@ import java.util.Map.Entry;
 class Environment {
     private HashMap<String,Boolean> variableValues = new HashMap<String,Boolean>();
     public Environment() { }
-    public void setVariable(String name, Boolean value) {
+    public Boolean setVariable(String name, Boolean value) {
 	variableValues.put(name, value);
-    }
+		return value;
+	}
     
     public Boolean getVariable(String name){
 		Boolean value = variableValues.get(name);
