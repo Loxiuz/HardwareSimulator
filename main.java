@@ -50,7 +50,7 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 
 	public AST visitStart(implParser.StartContext ctx){
 
-		Start start = new Hardware(ctx.id.getText());
+	/*	Start start = new Hardware(ctx.id.getText());
 
 		List<String>id = new ArrayList<String>();
 		for (Token t : ctx.id)
@@ -60,9 +60,9 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 		List<String>id = new ArrayList<String>();
 		for (Token t : ctx.id)
 			id.add(t.getText());
-		return new Outputs(id);
+		return new Outputs(id); */
 
-
+		return null;
 	}
 
 
@@ -77,17 +77,19 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	@Override
 	public AST visitSimulate(implParser.SimulateContext ctx) {
 
-		List<String> id = new ArrayList<String>();
+		/* List<String> id = new ArrayList<String>();
 		for (Token t : ctx.id) {
 			id.add(t.getText());
 		}
-		return new Simlulate(id);
+		return new Simlulate(id); */
+
+		return null;
 	}
 
 
 
 	@Override
-	public AST visitParantheses(implParser.ParanthesesContext ctx) {return new Parantheses(ctx.e1.getText());}
+	public AST visitParantheses(implParser.ParanthesesContext ctx) {return new Parantheses(ctx.e1.toString());}
 	@Override
 	public AST visitSIGNALS(implParser.SIGNALSContext ctx) {return new Signal(ctx.c.getText());}
 

@@ -5,7 +5,7 @@ public abstract class AST {
 }
 
 
-    abstract class Start extends AST{
+abstract class Start extends AST{
 
         String hardware;
         List<String> inputs;
@@ -19,23 +19,20 @@ public abstract class AST {
                 this.outputs = outputs;
                 this.latch = latch;
                 this.simlulate = simlulate;
-            }
+     }
 
-            public void eval(Environment env){
+     public void eval(Environment env){
 
-            }
-        }
-
-
-
-            class Latch extends Start {
+     }
+}
+                class Latch extends Start {
                 String id1;
                 String id2;
 
-                public Latch(String id1, String id2) {this.id1 = id1;this.id2 = id2;}
-                public void  eval(Environment env){
-                    id1.eval(env);
-                    id2.eval(env);
+                public Latch(String id1, String id2) {
+                    this.id1 = id1;this.id2 = id2;}
+                public void eval(Environment env){
+
                 }
             }
             class Update extends AST {
@@ -46,8 +43,8 @@ public abstract class AST {
                     this.e1 = e1;
                 }
 
-                public boolean eval(Environment env){
-                    env.setVariable(varname,e.eval(env));
+                public void eval(Environment env){
+                    env.setVariable(x1,e1.eval(env));
                 }
             }
 
@@ -60,6 +57,10 @@ public abstract class AST {
                     this.c = c;
                 }
 
+                @Override
+                void eval(Environment env) {
+
+                }
             }
 
 
@@ -71,22 +72,29 @@ public abstract class AST {
                 Expr e1;
                 public Parantheses(Expr e1) {this.e1 = e1;}
 
-                public boolean eval(Environment env){return env.getVariable(e1);}
+                public boolean eval(Environment env){return env.getVariable(e1.toString());} //Probably not correct
 
             }
-            class Signal extends Expr{
+            class Signal extends Expr {
                 public Boolean c;
-                public Signal (Boolean c) {this.c = c;}
-                public boolean eval(Environment env){return c;}
 
+                public Signal(Boolean c) {
+                    this.c = c;
+                }
+
+                public boolean eval(Environment env) {
+                    return c;
+                }
+
+            }
                 class Variable extends Expr {
                     public String id;
 
                     public Variable(String id) {this.id = id;}
 
                     public boolean eval(Environment env) {
-
-                        return env.getVariable(id);}
+                        return env.getVariable(id);
+                    }
                 }
                 class Negation extends Expr {
                     Expr e1;
@@ -112,5 +120,4 @@ public abstract class AST {
                 }
 
 
-            }
 
