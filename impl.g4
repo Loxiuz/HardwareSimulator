@@ -11,7 +11,7 @@ start :  '.hardware'id= IDENTIFIER
 
 latchDec :'.latch' id1 = IDENTIFIER '->' id2 = IDENTIFIER  #Latch;
 updateDecl: x1 = IDENTIFIER '=' e1 = expr                  #Update;
-simlnp: id=IDENTIFIER '=' c=SIGNALS                        #Simulate;
+simlnp: id=IDENTIFIER '=' c=SIGNALS                       #Simulate;
 
 
 expr : '(' e1 = expr ')'                    #Parantheses

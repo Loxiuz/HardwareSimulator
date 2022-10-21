@@ -67,9 +67,7 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 
 
 	@Override
-	public AST visitLatch(implParser.LatchContext ctx) {
-		return new Latch(ctx.id1.getText(), ctx.id2.getText());
-	}
+	public AST visitLatch(implParser.LatchContext ctx) {return new Latch(ctx.id1.getText(), ctx.id2.getText());}
 
 	@Override
 	public AST visitUpdate(implParser.UpdateContext ctx) {
@@ -77,20 +75,7 @@ class Interpreter extends AbstractParseTreeVisitor<AST> implements implVisitor<A
 	}
 
 	@Override
-	public AST visitSimulate(implParser.SimulateContext ctx) {
-		return new Simulate(ctx.id.getText(), ctx.c.getText());
-	}
-
-		/*
-		List<String> id = new ArrayList<String>();
-		for (Token t : ctx.id) {
-			id.add(t.getText());
-		}
-		return new Simlulate(id);
-
-		 */
-
-
+	public AST visitSimulate(implParser.SimulateContext ctx) {return new Simulate(ctx.id.getText(), ctx.c.getText());}
 
 
 	@Override
